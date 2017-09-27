@@ -1,0 +1,39 @@
+.game {
+    width: 30%;
+    height: 20%;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+}
+
+
+.board {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row;
+    flex-flow: row;
+    justify-content: space-around;
+   
+    line-height:30px;
+}
+
+.tile {
+    float:left;
+    width: 30%;
+    padding-bottom: 15%;
+    margin:1.66%;
+    background-color: #4271C9;
+    border: 5px;
+    border-style: black;
+}
+
+
+
