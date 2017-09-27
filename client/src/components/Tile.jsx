@@ -8,15 +8,8 @@ class Tile extends React.Component {
     }
 
     makeMove(index) {
-        console.log("player moved here");
-        console.log(this.props.location);
-        console.log(this.props);
-        this.props.recordPlayerMove(index);
+        this.props.recordPlayerMove(this.props.location);
     }
-
-
-
-
 
     render() {
         return (

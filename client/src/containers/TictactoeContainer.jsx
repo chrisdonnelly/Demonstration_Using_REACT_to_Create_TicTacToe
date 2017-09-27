@@ -8,23 +8,65 @@ class TictactoeContainer extends React.Component {
         super(props);
 
         this.state = {
-            board: [
-                null, null, null,
-                null, null, null,
-                null, null, null
-            ],
+
+            currentPlayer: 'plX',
             playerX: 0,
             playerO: 0,
-            winningNumbers: [],
+            winningNumbers: [3, 9, 12, 15, 21],
             movesCounter: 0,
             winner: null
         }
-
     }
 
     recordPlayerMove(tileIndex) {
-        let score = this.state.playerX + tileIndex;
-        this.setState({playerX: score })
+        this.step(tileIndex);
+        this.switcher()
+    }
+
+    step(tileIndex) {
+        let score = null;
+        let moves = null;
+
+        if (this.state.currentPlayer === 'plX') {
+            score = this.state.playerX + tileIndex;
+            moves = this.state.movesCounter += 1;
+            this.setState({ playerX: score, movesCounter: moves })
+            this.winChecker(score, 'playerX');
+        } else {
+            score = this.state.playerO + tileIndex;
+            moves = this.state.movesCounter += 1;
+            this.setState({ playerO: score, movesCounter: moves })
+            this.winChecker(score, 'playerO');
+        }
+        return;
+    }
+
+    switcher() {
+        if (this.state.currentPlayer === 'plX') {
+            this.setState({ currentPlayer: 'plO' })
+        } else {
+            this.setState({ currentPlayer: 'plX' })
+        }
+    }
+
+    winChecker(score, player) {
+        if (this.state.movesCounter > 4) {
+            this.state.winningNumbers.forEach((number) => {
+                if (number === score) {
+                    console.log("true??")
+                    this.setState({ winner: player })
+                    alert("The winner is " + player)
+                }
+            });
+        }
+    }
+
+    winDeclarer() {
+        if (this.state.winner !== null ) {
+   
+        } else {
+            return;
+        }
     }
 
     render() {
@@ -33,16 +75,7 @@ class TictactoeContainer extends React.Component {
                 <div className="header">
                     <h2>TicTacToe Container</h2>
                 </div>
-                <Board />
-                {this.state.board.map(function (value, index) {
-                    return (
-                        <Tile
-                            key={index}
-                            location={index}
-                            value={value}
-                            />
-                    )})
-                }
+                <Board recordPlayerMove={this.recordPlayerMove.bind(this)} />
             </div>
         );
     }
